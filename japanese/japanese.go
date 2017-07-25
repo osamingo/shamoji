@@ -2,8 +2,8 @@ package japanese
 
 import (
 	"github.com/ikawaha/kagome.ipadic/tokenizer"
+	"github.com/irfansharif/cfilter"
 	"github.com/osamingo/shamoji"
-	"github.com/tylertreat/BoomFilters"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -14,22 +14,22 @@ type (
 	}
 	// Filter has bloom filter.
 	Filter struct {
-		Bloom *boom.BloomFilter
+		Cuckoo *cfilter.CFilter
 	}
 )
 
 // NewServe generates shamoji.Serve for japanese.
 func NewServe(blacklist []string) *shamoji.Serve {
-	bf := boom.NewBloomFilter(uint(len(blacklist)), 0.01)
+	cf := cfilter.New(cfilter.Size(uint(len(blacklist))))
 	for i := range blacklist {
-		bf.Add([]byte(blacklist[i]))
+		cf.Insert([]byte(blacklist[i]))
 	}
 	return &shamoji.Serve{
 		Tokenizer: &Tokenizer{
 			Kagome: tokenizer.NewWithDic(tokenizer.SysDicIPASimple()),
 		},
 		Filer: &Filter{
-			Bloom: bf,
+			Cuckoo: cf,
 		},
 	}
 }
@@ -74,5 +74,5 @@ func (t *Tokenizer) Tokenize(sentence string) [][]byte {
 
 // Test implements shamoji.Filter interface.
 func (f *Filter) Test(src []byte) bool {
-	return f.Bloom.Test(src)
+	return f.Cuckoo.Lookup(src)
 }

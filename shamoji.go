@@ -24,7 +24,24 @@ type (
 )
 
 // Do filtering sentence.
-func (s *Serve) Do(c context.Context, sentence string) (bool, string) {
+func (s *Serve) Do(sentence string) (bool, string) {
+
+	ts := s.Tokenizer.Tokenize(sentence)
+	if len(ts) == 0 {
+		return false, ""
+	}
+
+	for i := range ts {
+		if s.Filer.Test(ts[i]) {
+			return true, string(ts[i])
+		}
+	}
+
+	return false, ""
+}
+
+// DoAsync filtering sentence.
+func (s *Serve) DoAsync(c context.Context, sentence string) (bool, string) {
 
 	ts := s.Tokenizer.Tokenize(sentence)
 	if len(ts) == 0 {

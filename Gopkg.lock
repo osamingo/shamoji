@@ -14,6 +14,12 @@
   revision = "23eb09ba7f7fcb3c161f30658c3e0756f9180b46"
 
 [[projects]]
+  name = "github.com/irfansharif/cfilter"
+  packages = ["."]
+  revision = "6ad389892afd63fe7afd71f34b5d1276579827b9"
+  version = "v0.1.1"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -30,12 +36,6 @@
   packages = ["assert","mock"]
   revision = "69483b4bd14f5845b5a1e55bca19e954e827f1d0"
   version = "v1.1.4"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/tylertreat/BoomFilters"
-  packages = ["."]
-  revision = "b282640b93f349cd208f8d5921df2cfaf5780ee2"
 
 [[projects]]
   branch = "master"
@@ -58,6 +58,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8058251a5a72a90eb28a7560efeedf609845621166eda3e586712cf19b12d709"
+  inputs-digest = "98c794d3d221bd20700f016611ff18a1c173ed6bd90dfa12fdb95b99e3e88e10"
   solver-name = "gps-cdcl"
   solver-version = 1

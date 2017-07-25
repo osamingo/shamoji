@@ -43,11 +43,19 @@ func TestServe_Do(t *testing.T) {
 		Filer:     e,
 	}
 
-	ret, token := s.Do(context.Background(), "fuck you.")
+	ret, token := s.Do("fuck you.")
 	assert.True(t, ret)
 	assert.Equal(t, "fuck", token)
 
-	ret, token = s.Do(context.Background(), "I'm a student.")
+	ret, token = s.Do("I'm a student.")
+	assert.False(t, ret)
+	assert.Empty(t, token)
+
+	ret, token = s.DoAsync(context.Background(), "fuck you.")
+	assert.True(t, ret)
+	assert.Equal(t, "fuck", token)
+
+	ret, token = s.DoAsync(context.Background(), "I'm a student.")
 	assert.False(t, ret)
 	assert.Empty(t, token)
 }

@@ -22,5 +22,5 @@
 
 
 [[constraint]]
-  name = "github.com/willf/bloom"
-  version = "2.0.3"
+  name = "github.com/irfansharif/cfilter"
+  version = "0.1.1"

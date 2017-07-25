@@ -4,9 +4,8 @@ import (
 	"testing"
 
 	"github.com/ikawaha/kagome.ipadic/tokenizer"
+	"github.com/irfansharif/cfilter"
 	"github.com/stretchr/testify/assert"
-	"github.com/tylertreat/BoomFilters"
-	"golang.org/x/net/context"
 )
 
 var blacklist = []string{
@@ -21,10 +20,10 @@ func TestNewServe(t *testing.T) {
 	assert.NotNil(t, s.Tokenizer)
 	assert.NotNil(t, s.Filer)
 
-	ret, _ := s.Do(context.Background(), "LINE教えて、今すぐに死ね。")
+	ret, _ := s.Do("LINE教えて、今すぐに死ね。")
 	assert.True(t, ret)
 
-	ret, _ = s.Do(context.Background(), "すもももももももものうち")
+	ret, _ = s.Do("すもももももももものうち")
 	assert.False(t, ret)
 }
 
@@ -39,10 +38,10 @@ func TestTokenizer_Tokenize(t *testing.T) {
 
 func TestFilter_Test(t *testing.T) {
 	f := &Filter{
-		Bloom: boom.NewBloomFilter(uint(len(blacklist)), 0.01),
+		Cuckoo: cfilter.New(cfilter.Size(uint(len(blacklist)))),
 	}
 	for i := range blacklist {
-		f.Bloom.Add([]byte(blacklist[i]))
+		f.Cuckoo.Insert([]byte(blacklist[i]))
 	}
 	for i := range blacklist {
 		assert.True(t, f.Test([]byte(blacklist[i])))
