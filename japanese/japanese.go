@@ -41,18 +41,34 @@ func (t *Tokenizer) Tokenize(sentence string) [][]byte {
 	if len(ts) == 0 {
 		return nil
 	}
-	ret := make([][]byte, 0, len(ts))
+
+	ch := make(chan []byte, len(ts))
 	for i := range ts {
-		if ts[i].Class == tokenizer.DUMMY {
-			continue
-		}
-		switch ts[i].Pos() {
-		case "", "記号", "連体詞", "助動詞", "接頭詞", "助詞":
-			continue
-		default:
-			ret = append(ret, []byte(ts[i].Surface))
+		i := i
+		go func() {
+			var s []byte
+			defer func() {
+				ch <- s
+			}()
+			if ts[i].Class == tokenizer.DUMMY {
+				return
+			}
+			switch ts[i].Pos() {
+			case "", "記号", "連体詞", "助動詞", "接頭詞", "助詞":
+				return
+			default:
+				s = []byte(ts[i].Surface)
+			}
+		}()
+	}
+
+	ret := make([][]byte, 0, len(ts))
+	for range ts {
+		if t := <-ch; t != nil {
+			ret = append(ret, t)
 		}
 	}
+
 	return ret
 }
 
