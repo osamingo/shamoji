@@ -54,7 +54,7 @@ func (t *Tokenizer) Tokenize(sentence string) [][]byte {
 				return
 			}
 			switch ts[i].Pos() {
-			case "", "記号", "連体詞", "助動詞", "接頭詞", "助詞", "感動詞", "フィラー":
+			case "", "連体詞", "接続詞", "助詞", "助動詞", "記号", "フィラー", "その他":
 				return
 			default:
 				s = []byte(ts[i].Surface)
