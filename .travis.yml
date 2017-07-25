@@ -18,4 +18,8 @@ before_script:
   - staticcheck
 
 script:
-  - go test -v -race -cover . ./japanese
+  - echo mode:$' 'atomic > coverage.txt
+  - go list ./... | egrep -v vendor | xargs -n1 -I{} sh -c 'go test -race -covermode=atomic -coverprofile=coverage.tmp {} && tail -n +2 coverage.tmp >> coverage.txt' && rm coverage.tmp
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
