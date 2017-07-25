@@ -31,7 +31,11 @@ func TestTokenizer_Tokenize(t *testing.T) {
 	tr := &Tokenizer{
 		Kagome: tokenizer.NewWithDic(tokenizer.SysDicIPASimple()),
 	}
-	ts := tr.Tokenize("すもももももももものうち")
+
+	ts := tr.Tokenize("")
+	assert.Empty(t, ts)
+
+	ts = tr.Tokenize("すもももももももものうち")
 	assert.NotEmpty(t, ts)
 	assert.Len(t, ts, 4)
 }
