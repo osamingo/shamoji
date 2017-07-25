@@ -38,9 +38,6 @@ func NewServe(blacklist []string) *shamoji.Serve {
 func (t *Tokenizer) Tokenize(sentence string) [][]byte {
 
 	ts := t.Kagome.Analyze(norm.NFKC.String(sentence), tokenizer.Normal)
-	if len(ts) == 0 {
-		return nil
-	}
 
 	ch := make(chan []byte, len(ts))
 	for i := range ts {
