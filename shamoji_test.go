@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	_ "github.com/stretchr/testify/mock"
 	"golang.org/x/net/context"
 )
 
