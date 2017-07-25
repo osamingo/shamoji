@@ -5,7 +5,7 @@ import (
 
 	"github.com/ikawaha/kagome.ipadic/tokenizer"
 	"github.com/stretchr/testify/assert"
-	"github.com/willf/bloom"
+	"github.com/tylertreat/BoomFilters"
 	"golang.org/x/net/context"
 )
 
@@ -39,10 +39,10 @@ func TestTokenizer_Tokenize(t *testing.T) {
 
 func TestFilter_Test(t *testing.T) {
 	f := &Filter{
-		Bloom: bloom.NewWithEstimates(uint(len(blacklist)), 0.0001),
+		Bloom: boom.NewBloomFilter(uint(len(blacklist)), 0.01),
 	}
 	for i := range blacklist {
-		f.Bloom.AddString(blacklist[i])
+		f.Bloom.Add([]byte(blacklist[i]))
 	}
 	for i := range blacklist {
 		assert.True(t, f.Test([]byte(blacklist[i])))

@@ -3,7 +3,7 @@ package japanese
 import (
 	"github.com/ikawaha/kagome.ipadic/tokenizer"
 	"github.com/osamingo/shamoji"
-	"github.com/willf/bloom"
+	"github.com/tylertreat/BoomFilters"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -14,15 +14,15 @@ type (
 	}
 	// Filter has bloom filter.
 	Filter struct {
-		Bloom *bloom.BloomFilter
+		Bloom *boom.BloomFilter
 	}
 )
 
 // NewServe generates shamoji.Serve for japanese.
 func NewServe(blacklist []string) *shamoji.Serve {
-	bf := bloom.NewWithEstimates(uint(len(blacklist)), 0.0001)
+	bf := boom.NewBloomFilter(uint(len(blacklist)), 0.01)
 	for i := range blacklist {
-		bf.AddString(blacklist[i])
+		bf.Add([]byte(blacklist[i]))
 	}
 	return &shamoji.Serve{
 		Tokenizer: &Tokenizer{

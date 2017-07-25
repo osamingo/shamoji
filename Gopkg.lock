@@ -21,12 +21,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/spaolacci/murmur3"
-  packages = ["."]
-  revision = "0d12bf811670bf6a1a63828dfbd003eded177fce"
-
-[[projects]]
-  branch = "master"
   name = "github.com/stretchr/objx"
   packages = ["."]
   revision = "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
@@ -38,16 +32,10 @@
   version = "v1.1.4"
 
 [[projects]]
-  name = "github.com/willf/bitset"
+  branch = "master"
+  name = "github.com/tylertreat/BoomFilters"
   packages = ["."]
-  revision = "988f4f24992fc745de53c42df0da6581e42a6686"
-  version = "v1.1.2"
-
-[[projects]]
-  name = "github.com/willf/bloom"
-  packages = ["."]
-  revision = "54e3b963ee1652b06c4562cb9b6020ebc6e36e59"
-  version = "v2.0.3"
+  revision = "b282640b93f349cd208f8d5921df2cfaf5780ee2"
 
 [[projects]]
   branch = "master"
@@ -70,6 +58,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "54aeeb282b3ca844b76e9d677507a0c88f9ced0dcaab25cd0990eb50033eacee"
+  inputs-digest = "8058251a5a72a90eb28a7560efeedf609845621166eda3e586712cf19b12d709"
   solver-name = "gps-cdcl"
   solver-version = 1
