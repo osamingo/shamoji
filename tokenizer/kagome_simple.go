@@ -5,14 +5,14 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
-// KagomeTokenizer tokenize by kagome.
-type KagomeTokenizer struct {
+// KagomeSimpleTokenizer tokenize by kagome.
+type KagomeSimpleTokenizer struct {
 	Form   norm.Form
 	Kagome tokenizer.Tokenizer
 }
 
 // Tokenize implements shamoji.Tokenizer interface.
-func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
+func (kt *KagomeSimpleTokenizer) Tokenize(sentence string) [][]byte {
 
 	ts := kt.Kagome.Analyze(kt.Form.String(sentence), tokenizer.Normal)
 	ch := make(chan []byte, len(ts))
@@ -46,9 +46,9 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 	return ret
 }
 
-// NewKagomeKagomeTokenizer generates new KagomeTokenizer.
-func NewKagomeKagomeTokenizer(f norm.Form) *KagomeTokenizer {
-	return &KagomeTokenizer{
+// NewKagomeSimpleTokenizer generates new KagomeSimpleTokenizer.
+func NewKagomeSimpleTokenizer(f norm.Form) *KagomeSimpleTokenizer {
+	return &KagomeSimpleTokenizer{
 		Form:   f,
 		Kagome: tokenizer.NewWithDic(tokenizer.SysDicIPASimple()),
 	}

@@ -10,7 +10,7 @@ import (
 
 func TestNewKagomeKagomeTokenizer(t *testing.T) {
 
-	kt := NewKagomeKagomeTokenizer(norm.NFKC)
+	kt := NewKagomeSimpleTokenizer(norm.NFKC)
 
 	assert.NotNil(t, kt)
 	assert.Equal(t, kt.Form, norm.NFKC)
@@ -20,7 +20,7 @@ func TestNewKagomeKagomeTokenizer(t *testing.T) {
 
 func TestKagomeTokenizer_Tokenize(t *testing.T) {
 
-	kt := NewKagomeKagomeTokenizer(norm.NFKC)
+	kt := NewKagomeSimpleTokenizer(norm.NFKC)
 
 	ts := kt.Tokenize("")
 	assert.Empty(t, ts)
