@@ -27,7 +27,9 @@ import (
 	"sync"
 
 	"github.com/osamingo/shamoji"
-	"github.com/osamingo/shamoji/japanese"
+	"github.com/osamingo/shamoji/filter"
+	"github.com/osamingo/shamoji/tokenizer"
+	"golang.org/x/text/unicode/norm"
 )
 
 var (
@@ -36,16 +38,16 @@ var (
 )
 
 func main() {
-	yes, word := Contains("いつか殺す")
+	yes, word := Contains("我が生涯に一片の悔い無し")
 	fmt.Printf("Result: %v, Word: %s", yes, word)
 }
 
 func Contains(sentence string) (bool, string) {
 	o.Do(func() {
-		s = japanese.NewServe([]string{
-			"死ね",
-			"殺す",
-		})
+		s = &shamoji.Serve{
+			Tokenizer: tokenizer.NewKagomeKagomeTokenizer(norm.NFKC),
+			Filer:     filter.NewCuckooFilter("ケンシロウ", "悔い"),
+		}
 	})
 	return s.Do(sentence)
 }
