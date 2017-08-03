@@ -19,7 +19,7 @@ func TestNewCuckooFilter(t *testing.T) {
 
 	assert.NotNil(t, cf)
 	assert.NotNil(t, cf.Cuckoo)
-	assert.Equal(t, uint(3), cf.Cuckoo.Count())
+	assert.Equal(t, 3, int(cf.Cuckoo.Count()))
 	assert.Implements(t, (*shamoji.Filter)(nil), cf)
 }
 

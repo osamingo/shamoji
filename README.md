@@ -45,7 +45,7 @@ func main() {
 func Contains(sentence string) (bool, string) {
 	o.Do(func() {
 		s = &shamoji.Serve{
-			Tokenizer: tokenizer.NewKagomeKagomeTokenizer(norm.NFKC),
+			Tokenizer: tokenizer.NewKagomeSimpleTokenizer(norm.NFKC),
 			Filer:     filter.NewCuckooFilter("涯に", "悔い"),
 		}
 	})
