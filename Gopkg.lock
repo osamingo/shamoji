@@ -14,10 +14,10 @@
   revision = "23eb09ba7f7fcb3c161f30658c3e0756f9180b46"
 
 [[projects]]
+  branch = "master"
   name = "github.com/irfansharif/cfilter"
   packages = ["."]
-  revision = "6ad389892afd63fe7afd71f34b5d1276579827b9"
-  version = "v0.1.1"
+  revision = "d07d951ff29d52840ca5e798a17e80db4de8c820"
 
 [[projects]]
   name = "github.com/pmezard/go-difflib"
@@ -27,37 +27,31 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/stretchr/objx"
-  packages = ["."]
-  revision = "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
-
-[[projects]]
   name = "github.com/stretchr/testify"
-  packages = ["assert","mock"]
-  revision = "69483b4bd14f5845b5a1e55bca19e954e827f1d0"
-  version = "v1.1.4"
+  packages = ["assert"]
+  revision = "2aa2c176b9dab406a6970f6a55f513e8a8c8b18f"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "ab5485076ff3407ad2d02db054635913f017b0ed"
+  revision = "a337091b0525af65de94df2eb7e98bd9962dcbe2"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sync"
   packages = ["errgroup"]
-  revision = "f52d1811a62927559de87708c8913c1650ce4f26"
+  revision = "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
   packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
-  revision = "836efe42bb4aa16aaa17b9c155d8813d336ed720"
+  revision = "88f656faf3f37f690df1a32515b479415e1a6769"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "98c794d3d221bd20700f016611ff18a1c173ed6bd90dfa12fdb95b99e3e88e10"
+  inputs-digest = "fed760f9af9ea3e70f68cada890d9d2c055e6ae6424a2773d3668c9135c46b2f"
   solver-name = "gps-cdcl"
   solver-version = 1
