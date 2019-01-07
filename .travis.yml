@@ -2,24 +2,25 @@ sudo: false
 
 language: go
 go:
-  - 1.9.x
   - 1.10.x
+  - 1.11.x
   - tip
 
+matrix:
+  allow_failures:
+    - go: tip
+
 before_install:
-  - go get -u github.com/golang/dep/cmd/dep golang.org/x/lint/golint honnef.co/go/tools/cmd/staticcheck
+  - go get -u github.com/golang/dep/cmd/dep github.com/golangci/golangci-lint/cmd/golangci-lint
 
 install:
   - dep ensure
 
 before_script:
-  - go vet
-  - golint -set_exit_status=1
-  - staticcheck
+  - golangci-lint run ./...
 
 script:
-  - echo mode:$' 'atomic > coverage.txt
-  - go list ./... | egrep -v vendor | xargs -n1 -I{} sh -c 'go test -race -covermode=atomic -coverprofile=coverage.tmp {} && tail -n +2 coverage.tmp >> coverage.txt' && rm coverage.tmp
+  - go test -covermode=atomic -coverprofile=coverage.txt ./...
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
