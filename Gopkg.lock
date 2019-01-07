@@ -2,56 +2,92 @@
 
 
 [[projects]]
+  digest = "1:56c130d885a4aacae1dd9c7b71cfe39912c7ebc1ff7d2b46083c8812996dc43b"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
+  pruneopts = ""
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
   version = "v1.1.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:b2a921cce13d049cfc0ec934d73addc798cbe67a97e41318be7d93a512307fbd"
   name = "github.com/ikawaha/kagome.ipadic"
-  packages = ["internal/da","internal/dic","internal/dic/data","internal/lattice","tokenizer"]
+  packages = [
+    "internal/da",
+    "internal/dic",
+    "internal/dic/data",
+    "internal/lattice",
+    "tokenizer",
+  ]
+  pruneopts = ""
   revision = "23eb09ba7f7fcb3c161f30658c3e0756f9180b46"
 
 [[projects]]
   branch = "master"
+  digest = "1:f97546e7e5392812f11d42a647848174f4796447f2440124d2951234dabcc84b"
   name = "github.com/irfansharif/cfilter"
   packages = ["."]
+  pruneopts = ""
   revision = "d07d951ff29d52840ca5e798a17e80db4de8c820"
 
 [[projects]]
+  digest = "1:256484dbbcd271f9ecebc6795b2df8cad4c458dd0f5fd82a8c2fa0c29f233411"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = ""
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:3b4870930878fb464616897c4e4bc100d323a8f95c3d8bbff0952d372571f7f7"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
+  pruneopts = ""
   revision = "2aa2c176b9dab406a6970f6a55f513e8a8c8b18f"
 
 [[projects]]
   branch = "master"
+  digest = "1:a143fd748b88512b9b7eb43e0ad5b92560d89dc596787438abe25d7e345b7362"
   name = "golang.org/x/net"
   packages = ["context"]
+  pruneopts = ""
   revision = "a337091b0525af65de94df2eb7e98bd9962dcbe2"
 
 [[projects]]
   branch = "master"
+  digest = "1:8aad4e360d6645abe564e925bd6d8d3b94975e52ce68af0c28f91b5aedb0637f"
   name = "golang.org/x/sync"
   packages = ["errgroup"]
+  pruneopts = ""
   revision = "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
 
 [[projects]]
   branch = "master"
+  digest = "1:39a1a71adca4b837a25dc6b5fcdd9d175e4597c6d3440f107dfeda31230218e4"
   name = "golang.org/x/text"
-  packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
+  packages = [
+    "internal/gen",
+    "internal/triegen",
+    "internal/ucd",
+    "transform",
+    "unicode/cldr",
+    "unicode/norm",
+  ]
+  pruneopts = ""
   revision = "88f656faf3f37f690df1a32515b479415e1a6769"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "fed760f9af9ea3e70f68cada890d9d2c055e6ae6424a2773d3668c9135c46b2f"
+  input-imports = [
+    "github.com/ikawaha/kagome.ipadic/tokenizer",
+    "github.com/irfansharif/cfilter",
+    "github.com/stretchr/testify/assert",
+    "golang.org/x/net/context",
+    "golang.org/x/sync/errgroup",
+    "golang.org/x/text/unicode/norm",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
