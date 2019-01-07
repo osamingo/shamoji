@@ -7,15 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var blacklist = []string{
-	"死ね",
-	"教えて",
-	"LINE",
-}
-
 func TestNewCuckooFilter(t *testing.T) {
 
-	cf := NewCuckooFilter(blacklist...)
+	cf := NewCuckooFilter("死ね", "教えて", "LINE")
 
 	assert.NotNil(t, cf)
 	assert.NotNil(t, cf.Cuckoo)
@@ -24,6 +18,8 @@ func TestNewCuckooFilter(t *testing.T) {
 }
 
 func TestCuckooFilter_Test(t *testing.T) {
+
+	blacklist := []string{"死ね", "教えて", "LINE"}
 
 	cf := NewCuckooFilter(blacklist...)
 
