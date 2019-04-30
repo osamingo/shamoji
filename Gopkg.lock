@@ -2,16 +2,16 @@
 
 
 [[projects]]
-  digest = "1:56c130d885a4aacae1dd9c7b71cfe39912c7ebc1ff7d2b46083c8812996dc43b"
+  digest = "1:0deddd908b6b4b768cfc272c16ee61e7088a60f7fe2f06c547bd3d8e1f8b8e77"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   pruneopts = ""
-  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
-  version = "v1.1.0"
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
 
 [[projects]]
   branch = "master"
-  digest = "1:b2a921cce13d049cfc0ec934d73addc798cbe67a97e41318be7d93a512307fbd"
+  digest = "1:a59784d870eac8c668e462a00a9285e5d0c9e7d63bc13774e2dd8139d05b0473"
   name = "github.com/ikawaha/kagome.ipadic"
   packages = [
     "internal/da",
@@ -21,7 +21,7 @@
     "tokenizer",
   ]
   pruneopts = ""
-  revision = "23eb09ba7f7fcb3c161f30658c3e0756f9180b46"
+  revision = "fe03f87a0c7c32945d956fcfc934c3e11d5eb182"
 
 [[projects]]
   branch = "master"
@@ -41,31 +41,31 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3b4870930878fb464616897c4e4bc100d323a8f95c3d8bbff0952d372571f7f7"
+  digest = "1:964b5eed574102624d89e65d60548ea4873cbb02cff615a4f17bbb6cf337750a"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
   pruneopts = ""
-  revision = "2aa2c176b9dab406a6970f6a55f513e8a8c8b18f"
+  revision = "34c6fa2dc70986bccbbffcc6130f6920a924b075"
 
 [[projects]]
   branch = "master"
-  digest = "1:a143fd748b88512b9b7eb43e0ad5b92560d89dc596787438abe25d7e345b7362"
+  digest = "1:368c063ff749ce9640ae6b8b7ce31b863f351b3ce24687ddd78d3c005b9fe248"
   name = "golang.org/x/net"
   packages = ["context"]
   pruneopts = ""
-  revision = "a337091b0525af65de94df2eb7e98bd9962dcbe2"
+  revision = "4829fb13d2c62012c17688fa7f629f371014946d"
 
 [[projects]]
   branch = "master"
-  digest = "1:8aad4e360d6645abe564e925bd6d8d3b94975e52ce68af0c28f91b5aedb0637f"
+  digest = "1:9f6efefb4e401a4f699a295d14518871368eb89403f2dd23ec11dfcd2c0836ba"
   name = "golang.org/x/sync"
   packages = ["errgroup"]
   pruneopts = ""
-  revision = "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
+  revision = "112230192c580c3556b8cee6403af37a4fc5f28c"
 
 [[projects]]
   branch = "master"
-  digest = "1:39a1a71adca4b837a25dc6b5fcdd9d175e4597c6d3440f107dfeda31230218e4"
+  digest = "1:740b51a55815493a8d0f2b1e0d0ae48fe48953bf7eaf3fcc4198823bf67768c0"
   name = "golang.org/x/text"
   packages = [
     "internal/gen",
@@ -76,7 +76,7 @@
     "unicode/norm",
   ]
   pruneopts = ""
-  revision = "88f656faf3f37f690df1a32515b479415e1a6769"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
 
 [solve-meta]
   analyzer-name = "dep"
