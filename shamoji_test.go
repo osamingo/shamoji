@@ -1,18 +1,20 @@
-package shamoji
+package shamoji_test
 
 import (
 	"strings"
 	"testing"
 
+	"github.com/osamingo/shamoji"
+
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
 
-type Example struct {
+type example struct {
 	Blacklist [][]byte
 }
 
-func (e *Example) Tokenize(sentence string) [][]byte {
+func (e *example) Tokenize(sentence string) [][]byte {
 	fs := strings.Fields(sentence)
 	ts := make([][]byte, len(fs))
 	for i := range fs {
@@ -21,7 +23,7 @@ func (e *Example) Tokenize(sentence string) [][]byte {
 	return ts
 }
 
-func (e *Example) Test(src []byte) bool {
+func (e *example) Test(src []byte) bool {
 	for i := range e.Blacklist {
 		if string(src) == string(e.Blacklist[i]) {
 			return true
@@ -31,13 +33,13 @@ func (e *Example) Test(src []byte) bool {
 }
 
 func TestServe_Do(t *testing.T) {
-	e := &Example{
+	e := &example{
 		Blacklist: [][]byte{
 			[]byte("fuck"),
 			[]byte("fucker"),
 		},
 	}
-	s := &Serve{
+	s := &shamoji.Serve{
 		Tokenizer: e,
 		Filer:     e,
 	}
@@ -56,13 +58,13 @@ func TestServe_Do(t *testing.T) {
 }
 
 func TestServe_DoAsync(t *testing.T) {
-	e := &Example{
+	e := &example{
 		Blacklist: [][]byte{
 			[]byte("fuck"),
 			[]byte("fucker"),
 		},
 	}
-	s := &Serve{
+	s := &shamoji.Serve{
 		Tokenizer: e,
 		Filer:     e,
 	}
