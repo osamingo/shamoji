@@ -1,16 +1,17 @@
-package tokenizer
+package tokenizer_test
 
 import (
 	"testing"
 
 	"github.com/osamingo/shamoji"
+	"github.com/osamingo/shamoji/tokenizer"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/text/unicode/norm"
 )
 
-func TestNewKagomeKagomeTokenizer(t *testing.T) {
+func TestNewKagomeSimpleTokenizer(t *testing.T) {
 
-	kt := NewKagomeSimpleTokenizer(norm.NFKC)
+	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
 
 	assert.NotNil(t, kt)
 	assert.Equal(t, kt.Form, norm.NFKC)
@@ -20,7 +21,7 @@ func TestNewKagomeKagomeTokenizer(t *testing.T) {
 
 func TestKagomeTokenizer_Tokenize(t *testing.T) {
 
-	kt := NewKagomeSimpleTokenizer(norm.NFKC)
+	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
 
 	ts := kt.Tokenize("")
 	assert.Empty(t, ts)
