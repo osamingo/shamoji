@@ -1,13 +1,14 @@
 module github.com/osamingo/shamoji
 
-go 1.13
+go 1.15
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/ikawaha/kagome.ipadic v1.1.1-0.20190607152658-3f6b482cc3ed
-	github.com/irfansharif/cfilter v0.0.0-20170705173418-d07d951ff29d
-	github.com/stretchr/testify v1.4.1-0.20190904163530-85f2b59c4459
-	golang.org/x/net v0.0.0-20190909003024-a7b16738d86b
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58
-	golang.org/x/text v0.3.3-0.20190829152558-3d0f7978add9
+	github.com/ikawaha/kagome.ipadic v1.1.2
+	github.com/irfansharif/cfilter v0.1.1
+	github.com/stretchr/testify v1.6.1
+	golang.org/x/net v0.0.0-20201224014010-6772e930b67b
+	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a
+	golang.org/x/text v0.3.4
+	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 )
