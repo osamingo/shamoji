@@ -10,3 +10,5 @@ linters:
   disable:
     - whitespace
     - wsl
+    - paralleltest
+    - goerr113

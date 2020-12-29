@@ -25,7 +25,6 @@ type (
 
 // Do filtering sentence.
 func (s *Serve) Do(sentence string) (bool, string) {
-
 	ts := s.Tokenizer.Tokenize(sentence)
 	if len(ts) == 0 {
 		return false, ""
@@ -42,7 +41,6 @@ func (s *Serve) Do(sentence string) (bool, string) {
 
 // DoAsync filtering sentence.
 func (s *Serve) DoAsync(c context.Context, sentence string) (bool, string) {
-
 	ts := s.Tokenizer.Tokenize(sentence)
 	if len(ts) == 0 {
 		return false, ""
@@ -55,6 +53,7 @@ func (s *Serve) DoAsync(c context.Context, sentence string) (bool, string) {
 			if s.Filer.Test(ts[i]) {
 				return errors.New(string(ts[i]))
 			}
+
 			return nil
 		})
 	}

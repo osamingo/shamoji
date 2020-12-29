@@ -18,6 +18,7 @@ func NewCuckooFilter(blacklist ...string) *CuckooFilter {
 	for i := range blacklist {
 		cf.Insert([]byte(blacklist[i]))
 	}
+
 	return &CuckooFilter{
 		Cuckoo: cf,
 	}

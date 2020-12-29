@@ -13,7 +13,6 @@ type KagomeSimpleTokenizer struct {
 
 // Tokenize implements shamoji.Tokenizer interface.
 func (kt *KagomeSimpleTokenizer) Tokenize(sentence string) [][]byte {
-
 	ts := kt.Kagome.Analyze(kt.Form.String(sentence), tokenizer.Normal)
 	ch := make(chan []byte, len(ts))
 

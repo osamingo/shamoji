@@ -9,7 +9,6 @@ import (
 )
 
 func TestNewCuckooFilter(t *testing.T) {
-
 	cf := filter.NewCuckooFilter("死ね", "教えて", "LINE")
 
 	assert.NotNil(t, cf)
@@ -19,7 +18,6 @@ func TestNewCuckooFilter(t *testing.T) {
 }
 
 func TestCuckooFilter_Test(t *testing.T) {
-
 	blacklist := []string{"死ね", "教えて", "LINE"}
 
 	cf := filter.NewCuckooFilter(blacklist...)

@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/osamingo/shamoji"
-
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
@@ -20,6 +19,7 @@ func (e *example) Tokenize(sentence string) [][]byte {
 	for i := range fs {
 		ts[i] = []byte(fs[i])
 	}
+
 	return ts
 }
 
@@ -29,6 +29,7 @@ func (e *example) Test(src []byte) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
