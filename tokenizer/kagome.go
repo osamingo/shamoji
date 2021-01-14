@@ -1,18 +1,19 @@
 package tokenizer
 
 import (
-	"github.com/ikawaha/kagome.ipadic/tokenizer"
+	"github.com/ikawaha/kagome-dict/ipa"
+	"github.com/ikawaha/kagome/v2/tokenizer"
 	"golang.org/x/text/unicode/norm"
 )
 
-// KagomeSimpleTokenizer tokenize by kagome.
-type KagomeSimpleTokenizer struct {
+// KagomeTokenizer tokenize by kagome.
+type KagomeTokenizer struct {
 	Form   norm.Form
-	Kagome tokenizer.Tokenizer
+	Kagome *tokenizer.Tokenizer
 }
 
 // Tokenize implements shamoji.Tokenizer interface.
-func (kt *KagomeSimpleTokenizer) Tokenize(sentence string) [][]byte {
+func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 	ts := kt.Kagome.Analyze(kt.Form.String(sentence), tokenizer.Normal)
 	ch := make(chan []byte, len(ts))
 
@@ -26,7 +27,7 @@ func (kt *KagomeSimpleTokenizer) Tokenize(sentence string) [][]byte {
 			if ts[i].Class == tokenizer.DUMMY {
 				return
 			}
-			switch ts[i].Pos() {
+			switch ts[i].Features()[0] {
 			case "", "連体詞", "接続詞", "助詞", "助動詞", "記号", "フィラー", "その他":
 				return
 			default:
@@ -45,10 +46,14 @@ func (kt *KagomeSimpleTokenizer) Tokenize(sentence string) [][]byte {
 	return ret
 }
 
-// NewKagomeSimpleTokenizer generates new KagomeSimpleTokenizer.
-func NewKagomeSimpleTokenizer(f norm.Form) *KagomeSimpleTokenizer {
-	return &KagomeSimpleTokenizer{
-		Form:   f,
-		Kagome: tokenizer.NewWithDic(tokenizer.SysDicIPASimple()),
+// NewKagomeTokenizer generates new KagomeTokenizer.
+func NewKagomeTokenizer(f norm.Form) (*KagomeTokenizer, error) {
+	k, err := tokenizer.New(ipa.Dict(), tokenizer.OmitBosEos())
+	if err != nil {
+		return nil, err
 	}
+	return &KagomeTokenizer{
+		Form:   f,
+		Kagome: k,
+	}, nil
 }
