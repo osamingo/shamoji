@@ -9,7 +9,10 @@ import (
 )
 
 func TestNewKagomeSimpleTokenizer(t *testing.T) {
-	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
+	kt, err := tokenizer.NewKagomeTokenizer(norm.NFKC)
+	if err != nil {
+		t.Fatal("should be nil")
+	}
 
 	if kt == nil {
 		t.Error("should not be nil")
@@ -24,7 +27,10 @@ func TestNewKagomeSimpleTokenizer(t *testing.T) {
 }
 
 func TestKagomeTokenizer_Tokenize(t *testing.T) {
-	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
+	kt, err := tokenizer.NewKagomeTokenizer(norm.NFKC)
+	if err != nil {
+		t.Fatal("should be nil")
+	}
 
 	cases := map[string]struct {
 		sentence string
