@@ -1,16 +1,25 @@
 package shamoji_test
 
 import (
+	"context"
 	"strings"
 	"testing"
 
 	"github.com/osamingo/shamoji"
-	"github.com/stretchr/testify/assert"
-	"golang.org/x/net/context"
 )
 
 type example struct {
-	Blacklist [][]byte
+	DenyList [][]byte
+}
+
+func newExample(deny ...[]byte) *shamoji.Serve {
+	e := &example{
+		DenyList: deny,
+	}
+	return &shamoji.Serve{
+		Tokenizer: e,
+		Filer:     e,
+	}
 }
 
 func (e *example) Tokenize(sentence string) [][]byte {
@@ -24,8 +33,8 @@ func (e *example) Tokenize(sentence string) [][]byte {
 }
 
 func (e *example) Test(src []byte) bool {
-	for i := range e.Blacklist {
-		if string(src) == string(e.Blacklist[i]) {
+	for i := range e.DenyList {
+		if string(src) == string(e.DenyList[i]) {
 			return true
 		}
 	}
@@ -34,51 +43,57 @@ func (e *example) Test(src []byte) bool {
 }
 
 func TestServe_Do(t *testing.T) {
-	e := &example{
-		Blacklist: [][]byte{
-			[]byte("fuck"),
-			[]byte("fucker"),
-		},
+	s := newExample([]byte("fuck"), []byte("fucker"))
+
+	cases := map[string]struct {
+		sentence string
+		result   bool
+		expect   string
+	}{
+		"Empty sentence":             {"", false, ""},
+		"Sentence with deny word":    {"I'm a student.", false, ""},
+		"Sentence without deny word": {"fuck you.", true, "fuck"},
 	}
-	s := &shamoji.Serve{
-		Tokenizer: e,
-		Filer:     e,
+
+	for n, c := range cases {
+		c := c
+		t.Run(n, func(t *testing.T) {
+			t.Parallel()
+			ret, token := s.Do(c.sentence)
+			if ret != c.result {
+				t.Error("shoud be", c.result)
+			}
+			if token != c.expect {
+				t.Error("shoud be", c.result)
+			}
+		})
 	}
-
-	ret, token := s.Do("")
-	assert.False(t, ret)
-	assert.Empty(t, token)
-
-	ret, token = s.Do("fuck you.")
-	assert.True(t, ret)
-	assert.Equal(t, "fuck", token)
-
-	ret, token = s.Do("I'm a student.")
-	assert.False(t, ret)
-	assert.Empty(t, token)
 }
 
 func TestServe_DoAsync(t *testing.T) {
-	e := &example{
-		Blacklist: [][]byte{
-			[]byte("fuck"),
-			[]byte("fucker"),
-		},
+	s := newExample([]byte("fuck"), []byte("fucker"))
+
+	cases := map[string]struct {
+		sentence string
+		result   bool
+		expect   string
+	}{
+		"Empty sentence":             {"", false, ""},
+		"Sentence with deny word":    {"I'm a student.", false, ""},
+		"Sentence without deny word": {"fuck you.", true, "fuck"},
 	}
-	s := &shamoji.Serve{
-		Tokenizer: e,
-		Filer:     e,
+
+	for n, c := range cases {
+		c := c
+		t.Run(n, func(t *testing.T) {
+			t.Parallel()
+			ret, token := s.DoAsync(context.Background(), c.sentence)
+			if ret != c.result {
+				t.Error("shoud be ", c.result)
+			}
+			if token != c.expect {
+				t.Error("shoud be ", c.result)
+			}
+		})
 	}
-
-	ret, token := s.DoAsync(context.Background(), "")
-	assert.False(t, ret)
-	assert.Empty(t, token)
-
-	ret, token = s.DoAsync(context.Background(), "fuck you.")
-	assert.True(t, ret)
-	assert.Equal(t, "fuck", token)
-
-	ret, token = s.DoAsync(context.Background(), "I'm a student.")
-	assert.False(t, ret)
-	assert.Empty(t, token)
 }

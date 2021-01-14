@@ -10,5 +10,10 @@ linters:
   disable:
     - whitespace
     - wsl
-    - paralleltest
     - goerr113
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - staticcheck

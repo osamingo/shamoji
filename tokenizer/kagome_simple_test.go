@@ -5,26 +5,42 @@ import (
 
 	"github.com/osamingo/shamoji"
 	"github.com/osamingo/shamoji/tokenizer"
-	"github.com/stretchr/testify/assert"
 	"golang.org/x/text/unicode/norm"
 )
 
 func TestNewKagomeSimpleTokenizer(t *testing.T) {
 	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
 
-	assert.NotNil(t, kt)
-	assert.Equal(t, kt.Form, norm.NFKC)
-	assert.NotNil(t, kt.Kagome)
-	assert.Implements(t, (*shamoji.Tokenizer)(nil), kt)
+	if kt == nil {
+		t.Error("should not be nil")
+	}
+	if kt.Form != norm.NFKC {
+		t.Error("should be NFKC")
+	}
+	var i interface{} = kt
+	if _, ok := i.(shamoji.Tokenizer); !ok {
+		t.Error("should be implements shamoji.Tokenizer")
+	}
 }
 
 func TestKagomeTokenizer_Tokenize(t *testing.T) {
 	kt := tokenizer.NewKagomeSimpleTokenizer(norm.NFKC)
 
-	ts := kt.Tokenize("")
-	assert.Empty(t, ts)
-
-	ts = kt.Tokenize("すもももももももものうち")
-	assert.NotEmpty(t, ts)
-	assert.Len(t, ts, 4)
+	cases := map[string]struct {
+		sentence string
+		expect   int
+	}{
+		"Empty sentence":    {"", 0},
+		"Japanese sentence": {"すもももももももものうち", 4},
+	}
+	for n, c := range cases {
+		c := c
+		t.Run(n, func(t *testing.T) {
+			t.Parallel()
+			ts := kt.Tokenize(c.sentence)
+			if len(ts) != c.expect {
+				t.Error("shound be length", c.expect)
+			}
+		})
+	}
 }

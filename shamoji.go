@@ -1,9 +1,9 @@
 package shamoji
 
 import (
+	"context"
 	"errors"
 
-	"golang.org/x/net/context"
 	"golang.org/x/sync/errgroup"
 )
 
