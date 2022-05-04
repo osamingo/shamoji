@@ -2,8 +2,8 @@ package tokenizer
 
 import (
 	"fmt"
-	"github.com/ikawaha/kagome-dict/uni"
 
+	"github.com/ikawaha/kagome-dict/uni"
 	"github.com/ikawaha/kagome/v2/tokenizer"
 	"golang.org/x/text/unicode/norm"
 )
