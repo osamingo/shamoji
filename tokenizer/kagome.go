@@ -2,8 +2,8 @@ package tokenizer
 
 import (
 	"fmt"
+	"github.com/ikawaha/kagome-dict/uni"
 
-	"github.com/ikawaha/kagome-dict/ipa"
 	"github.com/ikawaha/kagome/v2/tokenizer"
 	"golang.org/x/text/unicode/norm"
 )
@@ -54,7 +54,7 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 
 // NewKagomeTokenizer generates new KagomeTokenizer.
 func NewKagomeTokenizer(f norm.Form) (*KagomeTokenizer, error) {
-	k, err := tokenizer.New(ipa.Dict(), tokenizer.OmitBosEos())
+	k, err := tokenizer.New(uni.Dict(), tokenizer.OmitBosEos())
 	if err != nil {
 		return nil, fmt.Errorf("tokenizer: failed to generate tokenizer: %w", err)
 	}
