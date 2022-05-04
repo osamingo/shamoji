@@ -15,6 +15,7 @@ func (f *CuckooFilter) Test(src []byte) bool {
 // NewCuckooFilter generates new CuckooFilter.
 func NewCuckooFilter(blacklist ...string) *CuckooFilter {
 	cf := cfilter.New(cfilter.Size(uint(len(blacklist))))
+
 	for i := range blacklist {
 		cf.Insert([]byte(blacklist[i]))
 	}

@@ -16,6 +16,7 @@ func newExample(deny ...[]byte) *shamoji.Serve {
 	e := &example{
 		DenyList: deny,
 	}
+
 	return &shamoji.Serve{
 		Tokenizer: e,
 		Filer:     e,
@@ -25,6 +26,7 @@ func newExample(deny ...[]byte) *shamoji.Serve {
 func (e *example) Tokenize(sentence string) [][]byte {
 	fs := strings.Fields(sentence)
 	ts := make([][]byte, len(fs))
+
 	for i := range fs {
 		ts[i] = []byte(fs[i])
 	}
@@ -43,6 +45,8 @@ func (e *example) Test(src []byte) bool {
 }
 
 func TestServe_Do(t *testing.T) {
+	t.Parallel()
+
 	s := newExample([]byte("fuck"), []byte("fucker"))
 
 	cases := map[string]struct {
@@ -57,8 +61,10 @@ func TestServe_Do(t *testing.T) {
 
 	for n, c := range cases {
 		c := c
+
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
+
 			ret, token := s.Do(c.sentence)
 			if ret != c.result {
 				t.Error("shoud be", c.result)
@@ -71,6 +77,8 @@ func TestServe_Do(t *testing.T) {
 }
 
 func TestServe_DoAsync(t *testing.T) {
+	t.Parallel()
+
 	s := newExample([]byte("fuck"), []byte("fucker"))
 
 	cases := map[string]struct {
@@ -85,8 +93,10 @@ func TestServe_DoAsync(t *testing.T) {
 
 	for n, c := range cases {
 		c := c
+
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
+
 			ret, token := s.DoAsync(context.Background(), c.sentence)
 			if ret != c.result {
 				t.Error("shoud be ", c.result)

@@ -9,6 +9,8 @@ import (
 )
 
 func TestNewKagomeSimpleTokenizer(t *testing.T) {
+	t.Parallel()
+
 	kt, err := tokenizer.NewKagomeTokenizer(norm.NFKC)
 	if err != nil {
 		t.Fatal("should be nil")
@@ -16,10 +18,10 @@ func TestNewKagomeSimpleTokenizer(t *testing.T) {
 
 	if kt == nil {
 		t.Error("should not be nil")
-	}
-	if kt.Form != norm.NFKC {
+	} else if kt.Form != norm.NFKC {
 		t.Error("should be NFKC")
 	}
+
 	var i interface{} = kt
 	if _, ok := i.(shamoji.Tokenizer); !ok {
 		t.Error("should be implements shamoji.Tokenizer")
@@ -27,6 +29,8 @@ func TestNewKagomeSimpleTokenizer(t *testing.T) {
 }
 
 func TestKagomeTokenizer_Tokenize(t *testing.T) {
+	t.Parallel()
+
 	kt, err := tokenizer.NewKagomeTokenizer(norm.NFKC)
 	if err != nil {
 		t.Fatal("should be nil")
@@ -39,10 +43,13 @@ func TestKagomeTokenizer_Tokenize(t *testing.T) {
 		"Empty sentence":    {"", 0},
 		"Japanese sentence": {"すもももももももものうち", 4},
 	}
+
 	for n, c := range cases {
 		c := c
+
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
+
 			ts := kt.Tokenize(c.sentence)
 			if len(ts) != c.expect {
 				t.Error("shound be length", c.expect)

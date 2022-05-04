@@ -40,17 +40,21 @@ func (s *Serve) Do(sentence string) (bool, string) {
 }
 
 // DoAsync filtering sentence.
-func (s *Serve) DoAsync(c context.Context, sentence string) (bool, string) {
+func (s *Serve) DoAsync(ctx context.Context, sentence string) (bool, string) {
 	ts := s.Tokenizer.Tokenize(sentence)
 	if len(ts) == 0 {
 		return false, ""
 	}
 
-	eg, _ := errgroup.WithContext(c)
+	eg, _ := errgroup.WithContext(ctx)
+
 	for i := range ts {
 		i := i
+
 		eg.Go(func() error {
 			if s.Filer.Test(ts[i]) {
+				// define found error type...
+				//nolint: goerr113
 				return errors.New(string(ts[i]))
 			}
 

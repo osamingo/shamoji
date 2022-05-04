@@ -1,6 +1,8 @@
 package tokenizer
 
 import (
+	"fmt"
+
 	"github.com/ikawaha/kagome-dict/ipa"
 	"github.com/ikawaha/kagome/v2/tokenizer"
 	"golang.org/x/text/unicode/norm"
@@ -19,14 +21,17 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 
 	for i := range ts {
 		i := i
+
 		go func() {
 			var s []byte
 			defer func() {
 				ch <- s
 			}()
+
 			if ts[i].Class == tokenizer.DUMMY {
 				return
 			}
+
 			switch ts[i].Features()[0] {
 			case "", "連体詞", "接続詞", "助詞", "助動詞", "記号", "フィラー", "その他":
 				return
@@ -37,6 +42,7 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 	}
 
 	ret := make([][]byte, 0, len(ts))
+
 	for range ts {
 		if t := <-ch; t != nil {
 			ret = append(ret, t)
@@ -50,8 +56,9 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 func NewKagomeTokenizer(f norm.Form) (*KagomeTokenizer, error) {
 	k, err := tokenizer.New(ipa.Dict(), tokenizer.OmitBosEos())
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("tokenizer: failed to generate tokenizer: %w", err)
 	}
+
 	return &KagomeTokenizer{
 		Form:   f,
 		Kagome: k,
