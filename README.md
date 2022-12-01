@@ -14,7 +14,7 @@ The shamoji (杓文字) is word filtering package.
 ## Install
 
 ```
-$ go get -u github.com/osamingo/shamoji
+$ go get github.com/osamingo/shamoji@latest
 ```
 
 ## Usage
