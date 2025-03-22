@@ -1,6 +1,6 @@
 # shamoji
 
-[![GitHub Actions](https://github.com/osamingo/shamoji/workflows/CI/badge.svg?branch=master)](https://github.com/osamingo/shamoji/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/osamingo/shamoji/actions/workflows/actions.yml/badge.svg)](https://github.com/osamingo/shamoji/actions/workflows/actions.yml)
 [![codecov](https://codecov.io/gh/osamingo/shamoji/branch/master/graph/badge.svg)](https://codecov.io/gh/osamingo/shamoji)
 [![Go Report Card](https://goreportcard.com/badge/github.com/osamingo/shamoji)](https://goreportcard.com/report/github.com/osamingo/shamoji)
 [![codebeat badge](https://codebeat.co/badges/9d9fdf3d-0c6d-455f-8444-8399a07d49ae)](https://codebeat.co/projects/github-com-osamingo-shamoji-master)
