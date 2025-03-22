@@ -45,8 +45,6 @@ func TestKagomeTokenizer_Tokenize(t *testing.T) {
 	}
 
 	for n, c := range cases {
-		c := c
-
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
 

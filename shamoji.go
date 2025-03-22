@@ -49,8 +49,6 @@ func (s *Serve) DoAsync(ctx context.Context, sentence string) (bool, string) {
 	eg, _ := errgroup.WithContext(ctx)
 
 	for i := range ts {
-		i := i
-
 		eg.Go(func() error {
 			if s.Filer.Test(ts[i]) {
 				// define found error type...
