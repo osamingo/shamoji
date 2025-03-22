@@ -14,7 +14,7 @@ func TestNewCuckooFilter(t *testing.T) {
 
 	if cf == nil || cf.Cuckoo == nil {
 		t.Error("should not be nil")
-	} else if int(cf.Cuckoo.Count()) != 3 {
+	} else if cf.Cuckoo.Count() != 3 {
 		t.Error("should be 3")
 	}
 

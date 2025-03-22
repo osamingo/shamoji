@@ -20,8 +20,6 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 	ch := make(chan []byte, len(ts))
 
 	for i := range ts {
-		i := i
-
 		go func() {
 			var s []byte
 			defer func() {
@@ -33,6 +31,7 @@ func (kt *KagomeTokenizer) Tokenize(sentence string) [][]byte {
 			}
 
 			switch ts[i].Features()[0] {
+			//nolint: gosmopolitan
 			case "", "連体詞", "接続詞", "助詞", "助動詞", "記号", "フィラー", "その他":
 				return
 			default:

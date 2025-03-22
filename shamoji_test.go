@@ -1,7 +1,6 @@
 package shamoji_test
 
 import (
-	"context"
 	"strings"
 	"testing"
 
@@ -60,8 +59,6 @@ func TestServe_Do(t *testing.T) {
 	}
 
 	for n, c := range cases {
-		c := c
-
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
 
@@ -69,6 +66,7 @@ func TestServe_Do(t *testing.T) {
 			if ret != c.result {
 				t.Error("shoud be", c.result)
 			}
+
 			if token != c.expect {
 				t.Error("shoud be", c.result)
 			}
@@ -92,15 +90,14 @@ func TestServe_DoAsync(t *testing.T) {
 	}
 
 	for n, c := range cases {
-		c := c
-
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
 
-			ret, token := s.DoAsync(context.Background(), c.sentence)
+			ret, token := s.DoAsync(t.Context(), c.sentence)
 			if ret != c.result {
 				t.Error("shoud be ", c.result)
 			}
+
 			if token != c.expect {
 				t.Error("shoud be ", c.result)
 			}
